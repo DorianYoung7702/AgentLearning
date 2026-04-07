@@ -56,7 +56,60 @@
 
 > ⭐ 标记为大厂面试加分/必考内容
 
-## 🗺️ 学习路线图
+## ⚡ 快速学习路线（按时间窗口）
+
+> 根据你距离面试的时间选择对应路线，每条路线均以「能过面试」为目标。
+
+### 🔴 7 天冲刺（已有 LLM 基础，临近面试）
+
+```
+Day 1  Agent 核心原语    01-agent-fundamentals + 04-tool-use
+Day 2  RAG + 记忆        07-rag + 05-memory-systems
+Day 3  框架 + 协议       09-agent-frameworks + 13-mcp-protocols（⭐ 必考）
+Day 4  工程实践          20-agent-engineering
+Day 5  架构题专项        interview/questions-architecture.md（全刷）
+Day 6  编程题专项        interview/questions-coding.md（手写 ReAct + RAG）
+Day 7  全题库冲刺        questions-basic + questions-advanced（各选 10 题）
+```
+
+### � 2 周速成（有 ML/Python 基础）
+
+```
+第 1 周（原理层）
+  Day 1-2  01基础概念 全部（Agent + LLM + Prompt）
+  Day 3-4  02核心能力 全部（Tool + Memory + Planning）
+  Day 5    03进阶专题：07-rag + 08-multi-agent
+  Day 6    03进阶专题：09-agent-frameworks（重点框架选型）
+  Day 7    复习 + 刷 questions-basic（25 题）
+
+第 2 周（工程层 + 冲刺）
+  Day 8    04工程深入：13-mcp-protocols + 20-agent-engineering
+  Day 9    05底层原理：14-inference-optimization
+  Day 10   06安全前沿：19-cutting-edge（了解 2026 最新格局）
+  Day 11   interview/questions-architecture 全刷
+  Day 12   interview/questions-coding 手写全部代码题
+  Day 13   questions-advanced + questions-system-design
+  Day 14   模拟面试 + 查漏补缺
+```
+
+### 🟢 4 周系统学习（从零开始）
+
+按下方「完整学习路线图」的 6 个阶段顺序推进，每阶段结束后刷对应面试题。
+
+---
+
+### 🎯 各岗位侧重点
+
+| 岗位方向 | 必看模块 | 重点面试题 |
+|---------|---------|----------|
+| **Agent 开发工程师** | 01~09 + 13 + 20 | questions-coding + questions-basic |
+| **Agent 架构师** | 08 + 09 + 13 + 20 + 11 | questions-architecture + questions-system-design |
+| **LLM 推理工程师** | 14 + 15 + 12 + 16 | questions-advanced（推理优化部分） |
+| **AI 安全工程师** | 17 + 20 + 13 | questions-advanced（安全部分） |
+
+---
+
+## �🗺️ 完整学习路线图
 
 ### 第一阶段：基础概念（1-2 周）
 1. **Agent 基础概念与架构** — 什么是 Agent，核心组成，ReAct 范式

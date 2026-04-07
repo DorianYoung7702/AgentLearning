@@ -1,6 +1,7 @@
 # 前沿趋势与热点
 
 > 大厂面试经常考察你对前沿技术的了解程度，体现学习能力和技术敏感度。
+> **最后更新：2026 年 4 月**
 
 ## 1. Reasoning Models（推理模型）
 
@@ -16,14 +17,23 @@
   问题 → [模型] → <thinking>深度推理过程</thinking> → 答案
 ```
 
-### 1.2 代表模型
+### 1.2 代表模型（截至 2026.04）
 
-| 模型 | 厂商 | 特点 |
-|------|------|------|
-| o1 / o3 | OpenAI | 首个推理模型，Chain-of-Thought 内化到模型中 |
-| DeepSeek-R1 | DeepSeek | 开源推理模型，强化学习训练 |
-| Claude 3.5 (Extended Thinking) | Anthropic | 支持长推理链 |
-| QwQ | 阿里 | 开源推理模型 |
+| 模型 | 厂商 | 定价 ($/M Token) | 特点 |
+|------|------|-----------------|------|
+| **GPT-5 / GPT-5.4** | OpenAI | $2.5 入 / $15 出 | 多模态推理旗舰，1M 上下文，自动切换轻量/深度思考 |
+| **o3 / o4-mini** | OpenAI | $2 入 / $8 出 | 数学/科学专用推理模型，已被 GPT-5 系列部分取代 |
+| **Claude Sonnet 4.6 / Opus 4.6** | Anthropic | $3-5 入 / $15-25 出 | 1M 上下文，Agent 和编程领域最强，内置 Extended Thinking |
+| **Gemini 3.1 Pro** | Google | $2 入 / $12 出 | 原生多模态（文/图/视/音），1M 上下文 |
+| **DeepSeek-V3 / R2** | DeepSeek | $0.27-0.55 入 | 开源推理模型，R2 数学/代码强，可自建部署 |
+| **Kimi K2 / K2.5** | Moonshot | $0.38 入 / $1.72 出 | 2026 Q1 黑马，约 Claude 1/8 定价达到接近的质量 |
+| **Qwen3** | 阿里 | 开源 | MoE 架构，多语言推理，可私有化部署 |
+| **GLM-5.1 / GLM-4.7** | 智谱 | $0.39 入 / $1.75 出 | GLM-4.5 Air 免费层可用于轻量任务 |
+
+**2026 关键变化**：
+- 推理能力已**商品化**：开源模型（DeepSeek R2、Kimi K2、Qwen3）在 $0.3-2/M 价位提供接近旗舰的推理质量
+- 上下文窗口标配 **1M Token**，不再是差异化卖点
+- 推理成本从 2025 年的 5-20x 溢价降至 2-5x，免费推理层已出现
 
 ### 1.3 训练方法
 
@@ -46,8 +56,9 @@
 
 - **规划能力提升**：推理模型更擅长复杂任务分解
 - **减少工具调用**：部分需要工具的计算可直接推理完成
-- **权衡**：推理模型更慢更贵，适合复杂任务而非简单查询
 - **Think-then-Act**：推理后再决定行动，决策质量更高
+- **模型路由成为标配**：简单任务用 mini/免费层，复杂任务用旗舰推理模型
+- **2026 趋势**：GPT-5 已内置自适应推理（自动判断是否需要深度思考），推理不再是独立模型分类
 
 ## 2. Computer Use（计算机使用）
 
@@ -69,13 +80,14 @@ Agent:
   8. ... 完成购买
 ```
 
-### 2.2 代表产品
+### 2.2 代表产品（2026.04 更新）
 
 | 产品 | 厂商 | 状态 |
 |------|------|------|
-| Computer Use | Anthropic | API 可用 |
-| Operator | OpenAI | 已发布 |
-| Project Mariner | Google | 研究阶段 |
+| **Computer Use** | Anthropic | API 公开预览（2026.03），Claude 官方支持 |
+| **Operator** | OpenAI | 已商用发布 |
+| **Project Mariner** | Google | Gemini 生态集成中 |
+| **Claude Code** | Anthropic | 开发者终端 Agent，支持 checkpoints 和 VS Code 扩展 |
 
 ### 2.3 技术实现
 
@@ -102,53 +114,79 @@ Agent:
 
 ## 3. Agent 基础设施演进
 
-### 3.1 协议层
+### 3.1 协议层（2026 最新格局）
 
 ```
-2024之前：每个 Agent 应用自定义工具集成
-2024 Q4：MCP 协议标准化 Agent 与工具的连接
-2025 Q2：A2A 协议标准化 Agent 与 Agent 的协作
+2024 Q4: MCP 协议发布 (Anthropic)
+2025 Q2: A2A 协议发布 (Google)，50+ 企业支持
+2025 Q3: MCP Registry 上线，收录近 2000 个 MCP Server
+2025 Q4: MCP 加入 Linux Foundation，成为多公司开放标准
+2025-11: MCP 发布新 Spec 版本，新增 Tasks 原语（实验性）
+2026 Q1: MCP 2026 路线图发布（传输扩展、Agent 通信、企业就绪）
+2026:    ACP (IBM) 并入 A2A，统一 Agent-to-Agent 标准
 
-趋势：Agent 生态正在形成标准化的基础设施层
+当前格局：
+  MCP = Agent 连接工具的标准 (已成事实标准)
+  A2A = Agent 之间协作的标准 (快速成熟中)
 ```
 
-### 3.2 编排层
+### 3.2 编排层（2026 最新格局）
 
 ```
 框架演进：
-  LangChain (Chain) → LangGraph (Graph) → 更灵活的编排
+  LangChain (Chain) → LangGraph (Graph/状态机，126K+ Stars)
+  OpenAI Agents SDK (2025 新发) → 官方 Agent 构建工具
+  Google ADK → 集成 A2A + MCP 的 Agent 开发套件
+  Anthropic Claude Agents SDK → 深度 MCP 集成
+
+多 Agent 框架：
+  CrewAI → 原生 MCP 支持，角色编排
+  AutoGen (Microsoft) → 对话式多 Agent
+  OpenAI Swarm → 轻量实验性框架
 
 平台化：
   Dify, Coze → 低代码 Agent 构建
   → 非开发者也能构建 Agent
 
-趋势：Agent 开发门槛持续降低
+趋势：
+  - 厂商 SDK（OpenAI/Anthropic/Google）崛起，降低框架依赖
+  - MCP 支持成为框架标配
+  - Agent 开发门槛持续降低
 ```
 
-### 3.3 模型层
+### 3.3 模型层（2026 格局）
 
 ```
-通用模型 → 专用 Agent 模型
+2025: 通用模型 → 专用 Agent 模型
+2026: Agent 能力已内化为旗舰模型的标配功能
 
-Agent 专用能力：
-  - 原生 Function Calling 支持
+2026 旗舰模型标配能力：
+  - 原生 Function Calling / Tool Use
   - 结构化输出 (JSON Mode)
-  - 长上下文 (128K+)
-  - 推理能力 (o1/R1)
-  - 多模态理解 (Computer Use)
+  - 1M Token 上下文
+  - 内置推理（自适应 thinking）
+  - 多模态理解（文/图/视/音/屏幕）
+  - Computer Use 能力
+
+模型分级策略（企业标配）：
+  简单查询 → 免费/mini 模型 (GLM-4.5 Air, GPT-4o-mini)
+  中等任务 → 标准模型 (GPT-5, Sonnet 4.6)
+  复杂推理 → 旗舰模型 (GPT-5 Pro, Opus 4.6)
+  → 综合节省 60-80% 成本
 ```
 
 ## 4. Agent 产品形态演进
 
-### 4.1 编程 Agent
+### 4.1 编程 Agent（2026 最活跃的 Agent 品类）
 
 | 产品 | 形态 | 特点 |
 |------|------|------|
-| GitHub Copilot | IDE 插件 | 代码补全 + Chat |
-| Cursor | IDE | Agent 模式，多文件编辑 |
-| Windsurf | IDE | Cascade 深度集成 |
-| Devin | 独立产品 | 端到端软件工程 Agent |
-| OpenHands | 开源 | 编程 Agent 平台 |
+| **GitHub Copilot** | IDE 插件 | Agent 模式 + 多文件编辑 + PR 自动化 |
+| **Cursor** | IDE | Composer Agent，多文件编辑 |
+| **Windsurf** | IDE | Cascade 深度集成 |
+| **Claude Code** | CLI Agent | 终端内全自主编码，checkpoints 支持 |
+| **Devin** | 独立产品 | 端到端软件工程 Agent |
+| **OpenHands** | 开源 | 编程 Agent 平台 |
 
 ### 4.2 通用 Agent 平台
 
@@ -222,33 +260,36 @@ Agent 的输入输出不再局限于文本：
 应用：Computer Use、机器人控制、视频理解
 ```
 
-## 6. 行业趋势判断
+## 6. 行业趋势判断（2026.04 视角）
 
-### 6.1 短期（6-12个月）
+### 6.1 已经发生的事（2025 验证的趋势）
 
-- MCP 生态快速成熟，成为事实标准
-- 编程 Agent 能力大幅提升
-- 推理模型成为 Agent 的标配"大脑"
-- 企业级 Agent 平台爆发
+- ✅ MCP 成为事实标准（Registry 近 2000 Server，加入 Linux Foundation）
+- ✅ 推理模型商品化（开源推理模型质量追上闭源，成本降 10x+）
+- ✅ 编程 Agent 大幅提升（Claude Code、Cursor Agent 已进入日常开发）
+- ✅ 1M 上下文成为标配（GPT-5、Claude 4.x、Gemini 3.x 均支持）
+- ✅ 厂商推出官方 Agent SDK（OpenAI、Anthropic、Google 三家均发布）
 
-### 6.2 中期（1-2年）
+### 6.2 正在发生的事（2026 进行中）
 
-- Agent 之间的标准化协作（A2A 等协议）
-- Computer Use 类 Agent 商用化
-- 垂直领域 Agent 深度落地
-- Agent 安全和治理框架成熟
+- 🔄 Computer Use 从实验进入公开预览（Anthropic 2026.03 发布）
+- 🔄 A2A 协议生态建设（ACP 并入 A2A，多框架适配中）
+- 🔄 MCP 企业就绪（审计日志、SSO 集成、网关行为等企业级需求）
+- 🔄 Agent 安全治理框架逐步成熟
+- 🔄 垂直领域 Agent 深度落地（金融、医疗、法律）
 
-### 6.3 长期（2-5年）
+### 6.3 未来预判（2026-2028）
 
-- Agent 操作系统（Agent OS）
-- 自主进化的 Agent
-- 物理世界 Agent（机器人）
+- Agent 操作系统（Agent OS）概念落地
+- Agent 之间自动发现和协作（通过 A2A + MCP Registry）
+- 物理世界 Agent（机器人 + Computer Use 融合）
 - Agent 经济体（Agent 之间交易和协作）
+- 自主进化的 Agent（自动 Prompt 优化 + 工具创建 + 策略学习）
 
 ## 7. 面试高频问题
 
 ### Q1: 推理模型（如 o1/R1）和传统 LLM 有什么区别？对 Agent 有什么影响？
-**要点**：推理模型通过 RL 训练内化了 CoT，能在输出前深度思考。对 Agent：规划能力更强、复杂推理更可靠，但更慢更贵。适合用在 Agent 的规划阶段而非每步执行。
+**要点**：推理模型通过 RL 训练内化了 CoT，能在输出前深度思考。对 Agent：规划能力更强、复杂推理更可靠。2026 趋势：GPT-5 已将推理能力内化（自适应 thinking），不再需要单独选推理模型。开源推理模型（DeepSeek R2、Kimi K2）使推理成本降低 10 倍以上。
 
 ### Q2: 什么是 Computer Use？技术上如何实现？
 **要点**：Agent 通过截图+VLM 理解屏幕内容，生成鼠标/键盘操作指令。循环：截图 → VLM 推理 → 操作 → 截图。挑战：定位准确性、延迟、安全性、异常处理。
@@ -257,7 +298,10 @@ Agent 的输入输出不再局限于文本：
 **要点**：标准化 Agent 与工具的连接，将 N×M 集成问题变为 N+M。影响：工具开发者写一次 MCP Server 即可被所有 Agent 调用，极大降低集成成本，催生工具市场。
 
 ### Q4: 你认为 Agent 技术接下来最重要的发展方向是什么？
-**准备思路**：选 1-2 个方向深入阐述，说清楚 why + what + how。例如：① 推理模型让 Agent 规划能力质变 ② MCP/A2A 构建 Agent 基础设施 ③ 小模型+微调降低 Agent 使用门槛。
+**准备思路**：选 1-2 个方向深入阐述，说清楚 why + what + how。例如：① Computer Use 从 API 预览走向商用（Anthropic 2026.03 已公开预览）② MCP/A2A 构建标准化 Agent 基础设施（MCP 已加入 Linux Foundation）③ 模型路由 + 开源推理模型大幅降低 Agent 运行成本。
+
+### Q6: 2026 年的模型格局和 2024 年有什么变化？
+**要点**：① 上下文窗口从 128K 标配升至 1M ② 推理能力从高价专属变为商品化（$0.3/M Token 即可获得）③ 厂商 SDK 崛起（OpenAI Agents SDK、Google ADK、Claude Agents SDK）④ MCP 从新概念变为事实标准（2000+ Server）⑤ Computer Use 从实验变为公开预览。
 
 ### Q5: Agent 距离真正广泛落地还有哪些障碍？
 **要点**：① 可靠性（幻觉和错误率还不够低）② 成本（多步 LLM 调用成本高）③ 安全（Prompt Injection 等无完美防御）④ 评估（缺少标准化的评估体系）⑤ 用户信任（用户不放心完全自主的 Agent）。

@@ -1,12 +1,20 @@
 # MCP 协议与 Agent 互操作
 
-> MCP（Model Context Protocol）是 2024-2025 年最热的 Agent 基础设施协议，已成为面试高频考点。
+> MCP 已成为 Agent 连接工具的**事实标准**，是面试必考内容。
+> **最后更新：2026 年 4 月**
+
+**MCP 大事记**：
+- 2024 Q4：Anthropic 发布 MCP 协议
+- 2025 Q3：MCP Registry 上线（收录近 2000 个 MCP Server）
+- 2025 Q4：MCP 加入 **Linux Foundation**，成为多公司开放标准
+- 2025-11：发布最新 Spec 版本，新增 **Tasks 原语**（实验性）
+- 2026 Q1：发布 2026 路线图（传输扩展、Agent 通信、企业就绪、治理成熟）
 
 ## 1. 什么是 MCP？
 
 ### 1.1 定义
 
-**MCP（Model Context Protocol）** 是 Anthropic 于 2024 年底提出的开放标准协议，旨在标准化 **LLM 应用与外部数据源/工具之间的通信方式**。
+**MCP（Model Context Protocol）** 是 Anthropic 于 2024 年底提出、现由 Linux Foundation 托管的开放标准协议，旨在标准化 **LLM 应用与外部数据源/工具之间的通信方式**。
 
 **类比理解**：
 ```

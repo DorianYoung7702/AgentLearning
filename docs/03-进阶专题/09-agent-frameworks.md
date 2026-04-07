@@ -1,18 +1,23 @@
 # 主流 Agent 框架
 
 > 了解主流框架的设计理念和适用场景，面试中经常被问到框架选型问题。
+> **最后更新：2026 年 4 月**
 
-## 1. 框架全景图
+## 1. 框架全景图（2026）
 
 ```
 Agent 框架生态
+├── 厂商官方 SDK（2025-2026 新趋势）⭐
+│   ├── OpenAI Agents SDK        ← GPT 模型 + 内置工具
+│   ├── Anthropic Claude Agents SDK ← 深度 MCP 集成
+│   └── Google ADK               ← 集成 A2A + MCP
 ├── 单 Agent 框架
-│   ├── LangChain / LangGraph
+│   ├── LangChain / LangGraph (126K+ Stars)
 │   ├── LlamaIndex
-│   └── Semantic Kernel
+│   └── Semantic Kernel (Microsoft)
 ├── 多 Agent 框架
 │   ├── AutoGen (Microsoft)
-│   ├── CrewAI
+│   ├── CrewAI (原生 MCP 支持)
 │   └── MetaGPT
 ├── 轻量级/新兴框架
 │   ├── Smolagents (HuggingFace)
@@ -21,6 +26,10 @@ Agent 框架生态
 └── 工作流编排
     ├── Dify
     └── Coze
+
+MCP 支持情况：
+  ✅ Claude Agents SDK (最深) | ✅ CrewAI | ✅ LangGraph
+  ✅ Google ADK | ✅ OpenAI SDK (通过插件)
 ```
 
 ## 2. LangChain / LangGraph

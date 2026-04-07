@@ -1,6 +1,7 @@
 # LLM 推理优化
 
 > 大厂非常看重工程落地能力，推理优化是让 Agent 在生产环境中可用的关键技术。
+> **最后更新：2026 年 4 月**
 
 ## 1. 为什么需要推理优化？
 
@@ -149,16 +150,33 @@ PagedAttention 思想（类比操作系统虚拟内存）：
   - 支持更大 batch size → 更高吞吐量
 ```
 
-## 5. 推理框架
+## 5. 推理框架（2026 最新对比）
 
-### 5.1 vLLM
+### 5.1 主流框架横向对比
 
-| 特点 | 说明 |
-|------|------|
-| 核心技术 | PagedAttention |
-| 性能 | 吞吐量最高之一 |
-| 特点 | Continuous Batching、Tensor Parallel |
-| 适用 | 高并发在线服务 |
+| 框架 | 核心技术 | H100 吞吐量 | 冷启动 | 最适合场景 |
+|------|---------|------------|--------|----------|
+| **vLLM** | PagedAttention | 2,400 tok/s | ~60s | 快速上线、生态最广 |
+| **SGLang** | RadixAttention | 2,460 tok/s | ~60s | 前缀共享多、Agent 场景 |
+| **TensorRT-LLM** | TensorRT 编译 | 2,780 tok/s | ~28min | NVIDIA GPU 峰值性能 |
+| **LMDeploy** | TurboMind 引擎 | 2,460 tok/s | 中等 | 国内部署、华为 NPU |
+| **llama.cpp** | GGUF/CPU/GPU 混合 | 中等 | 极快 | 本地部署、CPU 推理 |
+| **Ollama** | 基于 llama.cpp | 中等 | 极快 | 开发调试、本地最简 |
+| **TGI** | HuggingFace | 中等 | 快 | HF 生态集成 |
+
+> **2026 结论**：SGLang 和 LMDeploy 在多数场景下比完全优化前的 vLLM 快 29%；TensorRT-LLM 峰值最高但编译冷启动 28 分钟适合固定部署；vLLM 胜在生态和开发友好度。
+
+### 5.2 vLLM
+
+```
+核心优势：
+  - PagedAttention：KV Cache 分页，显存利用率 ~90%+
+  - Continuous Batching：请求完成即释放，吞吐量大幅提升
+  - 生态最广：支持几乎所有主流模型
+  - 开发友好：60 秒冷启动，API 兼容 OpenAI
+
+适用：高并发在线服务、快速生产部署
+```
 
 ```python
 from vllm import LLM, SamplingParams
@@ -167,24 +185,28 @@ llm = LLM(model="Qwen/Qwen2.5-7B-Instruct", tensor_parallel_size=2)
 outputs = llm.generate(prompts, SamplingParams(temperature=0, max_tokens=256))
 ```
 
-### 5.2 TensorRT-LLM (NVIDIA)
+### 5.3 SGLang
 
-| 特点 | 说明 |
-|------|------|
-| 核心技术 | TensorRT 编译优化 |
-| 性能 | NVIDIA GPU 上最快 |
-| 特点 | 算子融合、量化优化 |
-| 适用 | NVIDIA GPU 生产部署 |
+```
+核心优势：
+  - RadixAttention：自动复用共享前缀的 KV Cache
+  - 对 Agent 场景特别友好（System Prompt 前缀共享）
+  - 吞吐量与 LMDeploy 持平，比 vLLM 快 ~29%
 
-### 5.3 其他推理框架
+适用：Agent 应用（System Prompt 长）、批量推理
+```
 
-| 框架 | 特点 |
-|------|------|
-| **SGLang** | 高性能，RadixAttention |
-| **llama.cpp** | CPU/GPU 混合，GGUF 格式 |
-| **Ollama** | 本地部署最简单 |
-| **TGI** | HuggingFace 出品 |
-| **MLC-LLM** | 多平台编译部署 |
+### 5.4 TensorRT-LLM (NVIDIA)
+
+```
+核心优势：
+  - TensorRT 编译优化，算子融合
+  - 峰值吞吐量最高（H100 上 2,780 tok/s）
+  - FP8 量化支持
+
+缺点：~28 分钟编译冷启动，灵活性差
+适用：固定模型的生产部署，追求峰值性能
+```
 
 ## 6. 批处理优化
 
@@ -272,9 +294,10 @@ Continuous Batching 相比 Static Batching 吞吐量提升 **2-10 倍**。
 ### Q5: 解释推测解码的原理。
 **要点**：用小模型快速生成 N 个候选 Token，大模型一次验证。匹配的接受，不匹配的拒绝重生成。无损加速 1.5-3x。关键条件：小模型够快且与大模型一致率高。
 
-### Q6: 对比 vLLM、TensorRT-LLM、SGLang。
+### Q6: 对比 vLLM、TensorRT-LLM、SGLang。（2026 最新数据）
 **要点**：
-- vLLM：PagedAttention，生态好，通用性强
-- TensorRT-LLM：NVIDIA 优化，NVIDIA GPU 上最快
-- SGLang：RadixAttention，前缀共享效率高
-- 选择取决于硬件、模型和场景
+- **vLLM**：PagedAttention，生态最广，60s 冷启动，H100 吞吐 ~2,400 tok/s，首选快速上线
+- **SGLang**：RadixAttention（自动前缀共享），H100 吞吐 ~2,460 tok/s，比 vLLM 快 ~29%，Agent 场景友好
+- **TensorRT-LLM**：峰值最高（~2,780 tok/s），但 ~28min 编译冷启动，适合固定模型生产部署
+- **LMDeploy**：吞吐与 SGLang 持平，国内部署首选，支持华为 NPU
+- 选择原则：追速度用 SGLang/LMDeploy；追极致性能用 TensorRT-LLM；追生态用 vLLM

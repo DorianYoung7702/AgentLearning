@@ -4,6 +4,8 @@
 
 ---
 
+> **最后更新：2026 年 4 月**（补充了 2025-2026 年新增术语）
+
 ## A
 
 | 术语 | 全称 | 解释 |
@@ -14,6 +16,8 @@
 | **Agent Card** | — | A2A 协议中 Agent 的"名片"，描述 Agent 的能力和接口 |
 | **ALiBi** | Attention with Linear Biases | 一种位置编码方式，在注意力分数上直接加线性位置偏置，支持长度外推 |
 | **ANN** | Approximate Nearest Neighbor | 近似最近邻搜索，牺牲少量精度换取大幅加速的向量检索方法 |
+| **ACP** | Agent Communication Protocol | IBM 提出的 Agent 通信协议，2025 年底并入 A2A，统一 Agent-to-Agent 标准 |
+| **ADK** | Agent Development Kit | Google 推出的官方 Agent 开发套件，集成 A2A 和 MCP 支持 |
 | **AWQ** | Activation-aware Weight Quantization | 激活感知的权重量化方法，保护对激活影响大的重要权重 |
 
 ## B
@@ -61,7 +65,8 @@
 
 | 术语 | 全称 | 解释 |
 |------|------|------|
-| **Feature Flag** | — | 功能开关，用于灰度发布和 A/B 测试 |
+| **Feature Flag** | 功能开关 | 用于灰度发布和 A/B 测试 |
+| **FP8** | Float8 | 8 位浮点格式，H100 实现原生支持，推理性能比 FP16 提升约 40% |
 | **Few-shot** | — | 少样本提示，在 Prompt 中提供几个示例来引导 LLM 输出 |
 | **Fine-tuning** | — | 微调，在预训练模型基础上用特定数据进一步训练以适配目标任务 |
 | **Flash Attention** | — | 优化注意力计算的 IO 操作，通过分块计算减少 GPU 显存读写，速度提升 2-4 倍 |
@@ -114,13 +119,15 @@
 | 术语 | 全称 | 解释 |
 |------|------|------|
 | **LangChain** | — | 最流行的 LLM 应用开发框架，提供链式调用和工具集成 |
-| **LangFuse** | — | 开源的 LLM 应用可观测性平台，支持 Tracing 和评估 |
+| **Claude Code** | Anthropic | 开发者终端 Agent，支持 checkpoints 和 VS Code 扩展 |
+| **Computer Use** | 计算机使用 | Agent 通过截图+VLM 理解屏幕、生成鼠标/键盘操作指令来使用计算机（Anthropic 2026.03 公开预览） |
 | **LangGraph** | — | LangChain 团队的 Agent 编排框架，基于有向图的状态机 |
 | **LangSmith** | — | LangChain 官方的追踪和评估 SaaS 平台 |
 | **LLM** | Large Language Model | 大语言模型，基于 Transformer 的大规模预训练语言模型 |
 | **LLM-as-Judge** | — | 用 LLM 评估另一个 LLM 输出质量的方法 |
 | **LLM Gateway** | — | LLM 网关，统一管理模型路由、限流、降级、缓存的中间层 |
 | **LlamaGuard** | — | Meta 的安全分类模型，用于检测有害输入输出 |
+| **LMDeploy** | — | 上海人工智能实验室的 LLM 推理框架，吸吐量与 SGLang 持平，支持华为 NPU |
 | **LlamaIndex** | — | 以数据和 RAG 为中心的 LLM 应用框架 |
 | **LoRA** | Low-Rank Adaptation | 低秩自适应微调，将权重变化矩阵分解为两个小矩阵，参数量减少 100-1000 倍 |
 | **Lost in the Middle** | — | LLM 对长上下文中间位置的信息注意力下降的现象 |
@@ -129,8 +136,10 @@
 
 | 术语 | 全称 | 解释 |
 |------|------|------|
-| **MCP** | Model Context Protocol | Anthropic 提出的标准化 LLM 应用与工具/数据源通信的开放协议 |
+| **MCP** | Model Context Protocol | Anthropic 提出、现由 Linux Foundation 托管的开放标准协议，标准化 LLM 应用与工具/数据源的连接 |
 | **MCP Host** | — | 运行 MCP Client 的宿主应用（如 Cursor、Claude Desktop） |
+| **MCP Registry** | — | MCP 官方的工具目录，2025 Q3 上线，目前收录近 2000 个 MCP Server |
+| **MCP Tasks** | — | MCP 2025-11 Spec 新增的实验性原语，支持异步长时间任务的生命周期管理 |
 | **MCP Server** | — | 通过 MCP 协议暴露工具和数据的服务端 |
 | **Mean Pooling** | — | 对所有 Token 输出取均值作为句子 Embedding 的方法 |
 | **MetaGPT** | — | 模拟软件公司的多 Agent 框架，Agent 扮演产品经理、架构师等角色 |
@@ -152,6 +161,7 @@
 | 术语 | 全称 | 解释 |
 |------|------|------|
 | **Ollama** | — | 本地运行 LLM 的工具，最简单的本地部署方案 |
+| **OpenAI Agents SDK** | — | OpenAI 2025 年发布的官方 Agent 构建工具，支持 GPT 模型 + Tool Use + 内置工具 |
 | **OpenTelemetry (OTel)** | — | 开源的可观测性框架标准，支持 Traces/Metrics/Logs |
 
 ## P
@@ -185,6 +195,7 @@
 
 | 术语 | 全称 | 解释 |
 |------|------|------|
+| **RadixAttention** | — | SGLang 的核心技术，基于算法 Radix Tree 自动复用共享前缀（如 System Prompt）的 KV Cache |
 | **RAG** | Retrieval-Augmented Generation | 检索增强生成，先从知识库检索相关文档再让 LLM 生成回答 |
 | **Rank (r)** | — | LoRA 中低秩矩阵的秩，控制新增参数量和拟合能力（典型值 8-64） |
 | **RBAC** | Role-Based Access Control | 基于角色的访问控制 |
@@ -195,6 +206,7 @@
 | **Rerank** | 重排序 | 对初步检索结果用精排模型重新排序，提升检索精度 |
 | **ReWOO** | Reasoning Without Observation | 先完成全部规划再执行工具调用，减少 LLM 调用次数 |
 | **RLHF** | Reinforcement Learning from Human Feedback | 基于人类反馈的强化学习，让 LLM 输出对齐人类偏好 |
+| **RLVR** | Reinforcement Learning from Verifiable Rewards | 基于可验证奖励的强化学习，用可客观验证的任务（数学、代码）训练推理模型 |
 | **RMSNorm** | Root Mean Square Normalization | 均方根归一化，去掉了均值中心化，比 LayerNorm 更快，现代 LLM 标配 |
 | **RoPE** | Rotary Position Embedding | 旋转位置编码，通过旋转操作编码相对位置信息，现代 LLM 主流方案 |
 | **Routing** | 路由 | 根据输入特征将请求分发到不同处理流程/模型的 Agent 工作流模式 |
@@ -252,6 +264,7 @@
 | **Vector Database** | 向量数据库 | 专门存储和检索高维向量的数据库（Milvus、Weaviate、Pinecone 等） |
 | **VLM** | Vision-Language Model | 视觉语言模型，同时处理图像和文本的多模态模型 |
 | **vLLM** | — | 高性能 LLM 推理框架，核心技术 PagedAttention，吞吐量业界领先 |
+| **Vibe Coding** | — | Andrej Karpathy 2025 年提出的概念：开发者用自然语言描述意图，让 AI Agent 处理实现 |
 
 ## W
 

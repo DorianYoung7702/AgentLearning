@@ -50,7 +50,8 @@
 │   └── questions-architecture.md          #   架构方向面试题（15题）⭐⭐
 │
 └── resources/
-    └── references.md                      # 推荐论文、博客、开源项目
+    ├── references.md                      # 推荐论文、博客、开源项目
+    └── glossary.md                        # 专业名词术语表（150+ 词条）
 ```
 
 > ⭐ 标记为大厂面试加分/必考内容

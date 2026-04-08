@@ -207,7 +207,32 @@ result = crew.kickoff()
 
 **适用场景**：软件开发自动化
 
-## 7. 其他值得关注的框架
+## 7. OpenClaw 🧡
+
+**定位**：开源个人 AI Agent 产品（2025.11 发布，2026.02 达 100K+ Stars）
+
+**核心特点**：
+| 特性 | 说明 |
+|------|------|
+| **Local-first** | 本地运行，数据不出设备 |
+| **多渠道** | WhatsApp/Telegram/Slack/微信等 20+ 消息渠道 |
+| **Skills 插件** | 100+ 内置技能（文件/Shell/浏览器/邮件等）|
+| **多 Agent** | Gateway 路由不同渠道到不同 Agent |
+| **系统访问** | 真正能执行任务（文件/命令/浏览器）|
+
+```bash
+# 安装
+npx openclaw@latest onboard
+# 支持模型：Claude / GPT / Gemini / DeepSeek / Ollama
+```
+
+**与开发框架的区别**：
+- LangGraph = 开发者用来**构建** Agent 的框架
+- OpenClaw = 可直接**使用**的 Agent 产品（同时可通过 Skills 扩展）
+
+> 📝 详细实战见 `09a-frameworks-deep-dive.md`
+
+## 8. 其他值得关注的框架
 
 ### Smolagents (HuggingFace)
 - 轻量级，代码简洁
@@ -229,7 +254,7 @@ result = crew.kickoff()
 - 可视化工作流编排
 - 适合非开发者快速搭建
 
-## 8. 框架选型指南
+## 9. 框架选型指南
 
 | 需求场景 | 推荐框架 |
 |---------|---------|
@@ -238,11 +263,12 @@ result = crew.kickoff()
 | RAG 为主的应用 | LlamaIndex |
 | 多 Agent 对话协作 | AutoGen |
 | 基于角色的多 Agent | CrewAI |
+| 个人 AI Agent（即装即用） | **OpenClaw** |
 | 软件开发自动化 | MetaGPT |
 | 轻量级、代码优先 | Smolagents |
 | 企业低代码平台 | Dify |
 
-## 9. 面试高频问题
+## 10. 面试高频问题
 
 ### Q1: 对比 LangChain 和 LlamaIndex 的适用场景。
 **要点**：LangChain 是通用 Agent 框架，适合需要工具调用和复杂流程的场景；LlamaIndex 以数据为中心，RAG 能力更强，适合知识库问答。两者可以结合使用。
@@ -258,3 +284,6 @@ result = crew.kickoff()
 
 ### Q5: 描述一个你用过的 Agent 框架的项目经验。
 **准备思路**：选择一个框架，说清楚 ① 项目背景和目标 ② 为什么选这个框架 ③ 架构设计（Agent 角色、工具、流程）④ 遇到的挑战和解决方案 ⑤ 效果和指标。
+
+### Q6: OpenClaw 的架构和传统 Agent 框架有什么区别？
+**要点**：OpenClaw 是可直接使用的 Agent 产品而非开发框架。架构特点：① Gateway WebSocket 控制平面 ② 多渠道接入（20+）③ Skills 插件系统（100+）④ 多 Agent 路由 ⑤ Local-first。启示：Agent 从开发工具走向大众产品，系统级访问和多渠道是关键差异化。

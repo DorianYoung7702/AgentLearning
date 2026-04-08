@@ -162,6 +162,7 @@
 |------|------|------|
 | **Ollama** | — | 本地运行 LLM 的工具，最简单的本地部署方案 |
 | **OpenAI Agents SDK** | — | OpenAI 2025 年发布的官方 Agent 构建工具，支持 GPT 模型 + Tool Use + 内置工具 |
+| **OpenClaw** | — | 2025 年底发布的开源个人 AI Agent（100K+ Stars），Local-first + 多渠道 + Skills 插件，从"能聊"到"能做事" |
 | **OpenTelemetry (OTel)** | — | 开源的可观测性框架标准，支持 Traces/Metrics/Logs |
 
 ## P

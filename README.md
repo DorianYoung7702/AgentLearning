@@ -23,7 +23,8 @@
 │   ├── 03-进阶专题/                        # 第三阶段（2-3 周）
 │   │   ├── 07-rag.md                     #   检索增强生成 (RAG)
 │   │   ├── 08-multi-agent.md             #   多智能体系统
-│   │   └── 09-agent-frameworks.md        #   主流 Agent 框架
+│   │   ├── 09-agent-frameworks.md        #   主流 Agent 框架
+│   │   └── 09a-frameworks-deep-dive.md   #   框架实战：LangChain/LangGraph/OpenClaw ⭐
 │   │
 │   ├── 04-工程深入/                        # 第四阶段（2-3 周）⭐ 大厂重点
 │   │   ├── 10-evaluation.md              #   Agent 评估与基准测试
